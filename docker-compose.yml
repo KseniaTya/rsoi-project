@@ -59,6 +59,7 @@ services:
     volumes:
       - ./services/gateway_service:/var/www/html
       - ./services/db_connect:/var/www/html/db_connect
+    command: bash -c "composer install && apache2-foreground"
 
   reservation_system:
     build: services

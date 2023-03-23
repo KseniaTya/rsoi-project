@@ -19,4 +19,3 @@ RUN pecl install -o -f redis \
 
 RUN curl -sS https://getcomposer.org/installer | \
     php -- --install-dir=/usr/bin/ --filename=composer \
-RUN composer install --prefer-source --no-interaction
