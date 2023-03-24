@@ -97,5 +97,18 @@ services:
       - ./services/rating_system:/var/www/html
       - ./services/db_connect:/var/www/html/db_connect
 
+  identity_provider:
+    build: services
+    container_name: identity_provider
+    restart: always
+    ports:
+      - "8040:80"
+    depends_on:
+      - postgres
+    volumes:
+      - ./services/identity_provider:/var/www/html
+      - ./services/db_connect:/var/www/html/db_connect
+    command: bash -c "composer install && apache2-foreground"
+
 volumes:
   db-data:

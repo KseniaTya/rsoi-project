@@ -1235,3 +1235,4 @@ buildNumber.properties
 # https://github.com/takari/maven-wrapper#usage-without-binary-jar
 .mvn/wrapper/maven-wrapper.jar
 /services/gateway_service/vendor/
+/services/identity_provider/vendor/
