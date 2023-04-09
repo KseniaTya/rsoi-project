@@ -1,10 +1,20 @@
 <?php
 // error_reporting(0);
 require_once __DIR__.'/router.php';
+include "src/Tokenizer.php";
+// ##################################################
+// ##################################################
+// ##################################################
 
-// ##################################################
-// ##################################################
-// ##################################################
+get('/autorize', function (){
+    $tokenizer = new Tokenizer();
+    echo $tokenizer->generateToken(["profile" => $_GET['profile'], "email" => $_GET['email']]);
+});
+
+get('/callback', function (){
+    $tokenizer = new Tokenizer();
+    echo $tokenizer->checkToken($_GET['jwt']);
+});
 
 // проверка работоспособности сайта
 get('/manage/health', 'src/health.php');

@@ -20,6 +20,10 @@ post('/api/v1/reservations', 'src/post_reservations.php');
 post('/api/v1/reservations/$reservationUid/return', 'src/post_return_book.php');
 // получить рейтинг пользователя
 get('/api/v1/rating', 'src/get_rating.php');
+// авторизоваться, получить токен
+get('/api/v1/authorize', 'src/auth/authorize.php');
+// получить инфо об авторизованном пользователе по токену
+get('/api/v1/callback', 'src/auth/callback.php');
 
 // доступ к тестам с уже введенными входным данным
 get('/test', 'tests/index.php');
