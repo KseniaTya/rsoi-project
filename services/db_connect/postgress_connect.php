@@ -71,7 +71,7 @@
                     profile VARCHAR(80) NOT NULL,
                     email VARCHAR(80) NOT NULL,
                     role VARCHAR(20) DEFAULT 'User'
-                        CHECK (condition IN ('User', 'Admin'))
+                        CHECK (role IN ('User', 'Admin'))
                 );"
             );
 

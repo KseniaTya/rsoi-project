@@ -2,13 +2,18 @@
 // error_reporting(0);
 require_once __DIR__.'/router.php';
 include "src/Tokenizer.php";
+include "src/Database.php";
 // ##################################################
 // ##################################################
 // ##################################################
 
 get('/autorize', function (){
-    $tokenizer = new Tokenizer();
-    echo $tokenizer->generateToken(["profile" => $_GET['profile'], "email" => $_GET['email']]);
+    if(Database::isset($_GET)){
+        $tokenizer = new Tokenizer();
+        echo $tokenizer->generateToken(["profile" => $_GET['profile'], "email" => $_GET['email']]);
+    } else {
+        echo "Access Denied";
+    }
 });
 
 get('/callback', function (){
