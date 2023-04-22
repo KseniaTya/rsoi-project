@@ -9,7 +9,11 @@ class Database{
         foreach($params as $k => $v){
             array_push($values, "$k='$v'");
         }
-        $result = pg_fetch_all(pg_query($connect, "select * from users where ".implode(" and ", $values)));
+        try{
+            $result = pg_fetch_all(pg_query($connect, "select * from users where ".implode(" and ", $values)));
+        } catch (Exception $e){
+            return false;
+        }
         return $result != Array();
     }
 }

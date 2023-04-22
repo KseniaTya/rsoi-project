@@ -21,6 +21,11 @@ get('/callback', function (){
     echo $tokenizer->checkToken($_GET['jwt']);
 });
 
+get('/.well-known/jwks.json', function (){
+    header('Content-Type: application/json; charset=utf-8');
+    echo file_get_contents(".well-known/jwks.json");
+});
+
 // проверка работоспособности сайта
 get('/manage/health', 'src/health.php');
 

@@ -56,6 +56,7 @@ services:
       - library_system
       - rating_system
       - reservation_system
+      - identity_provider
     volumes:
       - ./services/gateway_service:/var/www/html
       - ./services/db_connect:/var/www/html/db_connect
@@ -69,9 +70,11 @@ services:
       - "8070:80"
     depends_on:
       - postgres
+      - identity_provider
     volumes:
       - ./services/reservation_system:/var/www/html
       - ./services/db_connect:/var/www/html/db_connect
+    command: bash -c "composer install && php db_connect/load_jwks.php && apache2-foreground"
 
   library_system:
     build: services
@@ -81,9 +84,11 @@ services:
       - "8060:80"
     depends_on:
       - postgres
+      - identity_provider
     volumes:
       - ./services/library_system:/var/www/html
       - ./services/db_connect:/var/www/html/db_connect
+    command: bash -c "composer install && php db_connect/load_jwks.php && apache2-foreground"
 
   rating_system:
     build: services
@@ -93,9 +98,11 @@ services:
       - "8050:80"
     depends_on:
       - postgres
+      - identity_provider
     volumes:
       - ./services/rating_system:/var/www/html
       - ./services/db_connect:/var/www/html/db_connect
+    command: bash -c "composer install && php db_connect/load_jwks.php && apache2-foreground"
 
   identity_provider:
     build: services
@@ -108,7 +115,7 @@ services:
     volumes:
       - ./services/identity_provider:/var/www/html
       - ./services/db_connect:/var/www/html/db_connect
-    command: bash -c "composer install && apache2-foreground"
+    command: bash -c "composer install && php jwksGenerator.php && apache2-foreground"
 
 volumes:
   db-data:
