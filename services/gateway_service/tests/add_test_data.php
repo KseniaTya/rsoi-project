@@ -1,5 +1,5 @@
 <?php
-include("./db_connect/postgress_connect.php");
+include(__DIR__ ."/../instruments/postgress_connect.php");
 insert_tables($connect);
 function insert_tables($connect){
     // получение списка таблиц из бд

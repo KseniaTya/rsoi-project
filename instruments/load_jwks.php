@@ -1,5 +1,5 @@
 <?php
-include "./utils.php";
+include "utils.php";
 
 if (!is_dir(".well-known")) {
     mkdir(".well-known");

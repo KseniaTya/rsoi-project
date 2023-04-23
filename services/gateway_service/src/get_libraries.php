@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /** @var LeoCarmo\CircuitBreaker\CircuitBreaker $circuit */
-include "./utils.php";
+include "instruments/utils.php";
 
 try{
 header('Content-Type: application/json; charset=utf-8');

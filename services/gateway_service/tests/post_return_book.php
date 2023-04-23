@@ -1,5 +1,5 @@
 <?php
-include_once "./utils.php";
+include_once "instruments/utils.php";
 
 $username = "ksenia";
 $reservations = json_decode(curl("http://reservation_system:80/get_reservations?username=$username"));

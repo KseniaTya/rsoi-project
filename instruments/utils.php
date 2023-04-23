@@ -76,30 +76,35 @@ function normJsonStr($str){
     return iconv('cp1251', 'utf-8', $str);
 }
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 use LeoCarmo\CircuitBreaker\CircuitBreaker;
 use LeoCarmo\CircuitBreaker\Adapters\RedisAdapter;
-// Connect to redis
-$redis = new \Redis();
-
-$redis->connect('redis', 6379);
-
-$adapter = new RedisAdapter($redis, 'my-product');
 
 // возьмем название файла как название сервиса CircuitBreaker'а
 $stack = debug_backtrace();
 
+if($stack[0]['file'] !== "/var/www/html/instruments/load_jwks.php"){
+
+// Connect to redis
+    $redis = new \Redis();
+
+    $redis->connect('redis', 6379);
+
+    $adapter = new RedisAdapter($redis, 'my-product');
+
+
 // Set redis adapter for CB
-$circuit = new CircuitBreaker($adapter, end($stack)['args'][1]);
+    $circuit = new CircuitBreaker($adapter, end($stack)['args'][1]);
 
 // Configure settings for CB
-$circuit->setSettings([
-    'timeWindow' => 30, // Time for an open circuit (seconds)
-    'failureRateThreshold' => 3, // Fail rate for open the circuit
-    'intervalToHalfOpen' => 10,  // Half open time (seconds)
-]);
+    $circuit->setSettings([
+        'timeWindow' => 30, // Time for an open circuit (seconds)
+        'failureRateThreshold' => 3, // Fail rate for open the circuit
+        'intervalToHalfOpen' => 10,  // Half open time (seconds)
+    ]);
 
 // Check circuit status for service
-if (! $circuit->isAvailable()) {
-    die('Circuit is not available!');
+    if (! $circuit->isAvailable()) {
+        die('Circuit is not available!');
+    }
 }

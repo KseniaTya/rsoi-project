@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 /** @var LeoCarmo\CircuitBreaker\CircuitBreaker $circuit */
-include "./utils.php";
+include "instruments/utils.php";
 
 header('Content-Type: application/json; charset=utf-8');
 $input = json_decode( file_get_contents('php://input'), TRUE );

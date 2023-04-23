@@ -1,3 +1,3 @@
 <?php
-include "./utils.php";
+include "instruments/utils.php";
 echo curl("http://identity_provider:80/autorize?profile={$_GET['profile']}&email={$_GET['email']}");

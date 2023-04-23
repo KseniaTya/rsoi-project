@@ -1,6 +1,6 @@
 <?php
 
-include("./db_connect/postgress_connect.php");
+include("instruments/postgress_connect.php");
 /** @var $connect - переменная из postgress_connect.php с текцщим подключением к бд */
 $status = $_GET['status'];
 $reservationUid = $_GET['reservationUid'];

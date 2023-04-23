@@ -14,6 +14,16 @@ services:
     ports:
       - "5432:5432"
 
+  pgadmin:
+    container_name: pgadmin4_container
+    image: dpage/pgadmin4
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: root
+    ports:
+      - "5050:80"
+
   zookeeper:
     image: confluentinc/cp-zookeeper:7.3.2
     container_name: zookeeper
@@ -59,7 +69,7 @@ services:
       - identity_provider
     volumes:
       - ./services/gateway_service:/var/www/html
-      - ./services/db_connect:/var/www/html/db_connect
+      - ./instruments:/var/www/html/instruments
     command: bash -c "composer install && apache2-foreground"
 
   reservation_system:
@@ -73,8 +83,8 @@ services:
       - identity_provider
     volumes:
       - ./services/reservation_system:/var/www/html
-      - ./services/db_connect:/var/www/html/db_connect
-    command: bash -c "composer install && php db_connect/load_jwks.php && apache2-foreground"
+      - ./instruments:/var/www/html/instruments
+    command: bash -c "composer install && php instruments/load_jwks.php && apache2-foreground"
 
   library_system:
     build: services
@@ -87,8 +97,8 @@ services:
       - identity_provider
     volumes:
       - ./services/library_system:/var/www/html
-      - ./services/db_connect:/var/www/html/db_connect
-    command: bash -c "composer install && php db_connect/load_jwks.php && apache2-foreground"
+      - ./instruments:/var/www/html/instruments
+    command: bash -c "composer install && php instruments/load_jwks.php && apache2-foreground"
 
   rating_system:
     build: services
@@ -101,8 +111,8 @@ services:
       - identity_provider
     volumes:
       - ./services/rating_system:/var/www/html
-      - ./services/db_connect:/var/www/html/db_connect
-    command: bash -c "composer install && php db_connect/load_jwks.php && apache2-foreground"
+      - ./instruments:/var/www/html/instruments
+    command: bash -c "composer install && php instruments/load_jwks.php && apache2-foreground"
 
   identity_provider:
     build: services
@@ -114,7 +124,7 @@ services:
       - postgres
     volumes:
       - ./services/identity_provider:/var/www/html
-      - ./services/db_connect:/var/www/html/db_connect
+      - ./instruments:/var/www/html/instruments
     command: bash -c "composer install && php jwksGenerator.php && apache2-foreground"
 
 volumes:
