@@ -70,7 +70,7 @@ services:
     volumes:
       - ./services/gateway_service:/var/www/html
       - ./instruments:/var/www/html/instruments
-    command: bash -c "composer install && apache2-foreground"
+    command: bash -c "composer install && php instruments/load_jwks.php && apache2-foreground"
 
   reservation_system:
     build: services

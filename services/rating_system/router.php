@@ -1,4 +1,10 @@
 <?php
+
+require_once 'vendor/autoload.php';
+
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
 session_start();
 function get($route, $path_to_include){
   if( $_SERVER['REQUEST_METHOD'] == 'GET' ){ route($route, $path_to_include); }  
@@ -66,7 +72,8 @@ function route($route, $path_to_include){
   if( is_callable($callback) ){
     call_user_func_array($callback, $parameters);
     exit();
-  }    
+  }
+  middlewares($route);
   include_once __DIR__."/$path_to_include";
   exit();
 }
@@ -79,4 +86,21 @@ function is_csrf_valid(){
   if( ! isset($_SESSION['csrf']) || ! isset($_POST['csrf'])){ return false; }
   if( $_SESSION['csrf'] != $_POST['csrf']){ return false; }
   return true;
+}
+function middlewares($route){
+    $openAccessAddresses = ['/manage/health'];
+    if(!in_array($route, $openAccessAddresses)){
+        try {
+            $jwt= getallheaders()['token'] ?? "";
+            $jwks = json_decode(file_get_contents(".well-known/jwks.json"));
+            $jwk = $jwks->keys[0]->x5c[0];
+            $decoded = JWT::decode($jwt, new Key($jwk, 'RS256'));
+            $_GET['username'] = $decoded->profile;
+            // return json_encode($decoded);
+        } catch (Exception $e) {
+            http_response_code(401);
+            echo json_encode(["message" => "401 Unauthorized"]);
+            exit();
+        }
+    }
 }

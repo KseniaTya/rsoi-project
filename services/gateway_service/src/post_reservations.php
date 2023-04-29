@@ -9,27 +9,27 @@ try{
     $bookUid = $input['bookUid'] ?? null;
     $libraryUid = $input['libraryUid'] ?? null;
     $tillDate = $input['tillDate'] ?? null;
-    $username= getallheaders()['X-User-Name'] ?? null;
+    $token = getallheaders()['token'] ?? null;
 
-    validate(compact('bookUid', 'libraryUid', 'tillDate', 'username'), "validate_null", 404);
+    validate(compact('bookUid', 'libraryUid', 'tillDate', 'token'), "validate_null", 404);
 
     $tillDate = urlencode($input['tillDate']);
-    $username = urlencode($username);
-    $numBooks = curl("http://reservation_system:80/num_books?username=$username");
-    $numStars = curl("http://rating_system:80/num_stars?username=$username");
-    $available_count  = curl("http://library_system:80/getBook?book_uid=$bookUid&library_uid=$libraryUid");
+    $token = urlencode($token);
+    $numBooks = curl("http://reservation_system:80/num_books", ["token: $token"]);
+    $numStars = curl("http://rating_system:80/num_stars", ["token: $token"]);
+    $available_count  = curl("http://library_system:80/getBook?book_uid=$bookUid&library_uid=$libraryUid", ["token: $token"]);
     // echo "available_count = $available_count ";
     //echo "tillDate = $tillDate numBooks = $numBooks numStars = $numStars";
     if($numBooks < $numStars && $available_count > 0){
 
         // процесс взятия книги
-        $uuid = curl("http://reservation_system:80/add_reserv?username=$username&book_uid=$bookUid&library_uid=$libraryUid&till_date=$tillDate");
-        curl("http://library_system:80/count_book?book_uid=$bookUid&library_uid=$libraryUid&count=-1");
+        $uuid = curl("http://reservation_system:80/add_reserv?book_uid=$bookUid&library_uid=$libraryUid&till_date=$tillDate", ["token: $token"]);
+        curl("http://library_system:80/count_book?book_uid=$bookUid&library_uid=$libraryUid&count=-1", ["token: $token"]);
 
-        $reservations = json_decode(curl("http://gateway_service:80/api/v1/reservations", ['X-User-Name: '.getallheaders()['X-User-Name']]));
+        $reservations = json_decode(curl("http://gateway_service:80/api/v1/reservations", ['token: '.getallheaders()['token']]));
         $reservations = array_filter($reservations, fn($x) => $x->reservationUid == $uuid);
         $reservation = reset($reservations);
-        $rating = json_decode(curl("http://gateway_service:80/api/v1/rating", ['X-User-Name: ksenia']));
+        $rating = json_decode(curl("http://gateway_service:80/api/v1/rating", ["token: $token"]));
         $result = (object) array_merge((array) $reservation, (array) $rating);
         $circuit->success();
         http_response_code(200);

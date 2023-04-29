@@ -4,9 +4,9 @@ include "instruments/utils.php";
 
 try {
     header('Content-Type: application/json; charset=utf-8');
-    $username= getallheaders()['X-User-Name'] ?? "Test_User";
-    $username = urlencode($username);
-    $numStars = curl("http://rating_system:80/num_stars?username=$username");
+    $token= getallheaders()['token'] ?? "";
+    $token = urlencode($token);
+    $numStars = curl("http://rating_system:80/num_stars", ["token: $token"]);
     $result = ["stars" => (int)$numStars];
     $circuit->success();
 

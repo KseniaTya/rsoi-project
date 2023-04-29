@@ -7,6 +7,9 @@ try{
 
     $page = $_GET['page'] ?? 1;
     $size = $_GET['size'] ?? 50;
+    $token= getallheaders()['token'] ?? "";
+    $token = urlencode($token);
+
     if($size < 0 || $page < 0){
         echo "incorrect values!";
     }
@@ -14,7 +17,7 @@ try{
         $_GET['showAll'] = $_GET['showAll'] ?? "false";
 
 
-        $array = json_decode(curl("http://library_system:80/get_books&page=$page&size=$size&libraryUid=$libraryUid".($_GET['showAll']=="true" ?"&showAll=true" :"&showAll=false")));
+        $array = json_decode(curl("http://library_system:80/get_books&page=$page&size=$size&libraryUid=$libraryUid".($_GET['showAll']=="true" ?"&showAll=true" :"&showAll=false"), ["token: $token"]));
         $items = array_map(fn($item) => [
             "bookUid" => $item -> book_uid,
             "name"=> $item -> name,

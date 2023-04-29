@@ -22,5 +22,5 @@ function curl_post($url, $post_vars = "", $head_vars = []){
     $reservationUid = $args->reservationUid;
     curl_post("http://gateway_service:80/api/v1/reservations/$reservationUid/return",
         json_encode(["condition" => $args->condition, "date" => $args->date])
-        ,['X-User-Name: '.$args->username]);
+        ,['token: '.$args->token]);
 

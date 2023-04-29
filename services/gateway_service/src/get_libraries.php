@@ -7,11 +7,13 @@ header('Content-Type: application/json; charset=utf-8');
     $page = $_GET['page'] ?? 1;
     $size = $_GET['size'] ?? 50;
     $city = $_GET['city'] ?? "null";
+    $token= getallheaders()['token'] ?? "";
+    $token = urlencode($token);
     if($size < 0 || $page < 0){
         echo "incorrect values!";
     }
     else {
-        $array = json_decode(curl("http://library_system:80/get_libraries?city=$city&page=$page&size=$size"));
+        $array = json_decode(curl("http://library_system:80/get_libraries?city=$city&page=$page&size=$size", ["token: $token"]));
         $items = array_map(fn($item) => [
               "libraryUid"=> $item -> library_uid,
               "name"=> $item -> name,
