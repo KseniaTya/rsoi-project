@@ -88,8 +88,8 @@
                 VALUES(1, 1, 1);
             ');
             pg_query($connect, "
-                INSERT INTO users(id, profile, email, role)
-                VALUES(1, 'admin', 'admin@admin.ru', 'Admin');
+                INSERT INTO users(profile, email, role)
+                VALUES('admin', 'admin@admin.ru', 'Admin');
             ");
         }
     }

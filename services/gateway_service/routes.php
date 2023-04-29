@@ -24,6 +24,8 @@ get('/api/v1/rating', 'src/get_rating.php');
 get('/api/v1/authorize', 'src/auth/authorize.php');
 // получить инфо об авторизованном пользователе по токену
 get('/api/v1/callback', 'src/auth/callback.php');
+// зарегистрировать пользователя
+post('/api/v1/registration', 'src/post_user_registration.php');
 
 // доступ к тестам с уже введенными входным данным
 get('/test', 'tests/index.php');

@@ -1,14 +1,15 @@
 <?php
 // error_reporting(0);
-require_once __DIR__.'/router.php';
+require_once __DIR__ . '/router.php';
 include "src/Tokenizer.php";
 include "src/Database.php";
 // ##################################################
 // ##################################################
 // ##################################################
 
-get('/autorize', function (){
-    if(Database::isset($_GET)){
+get('/autorize', function () {
+    $db = new Database();
+    if ($db->isset($_GET)) {
         $tokenizer = new Tokenizer();
         echo $tokenizer->generateToken(["profile" => $_GET['profile'], "email" => $_GET['email']]);
     } else {
@@ -16,16 +17,36 @@ get('/autorize', function (){
     }
 });
 
-get('/callback', function (){
+get('/callback', function () {
     $tokenizer = new Tokenizer();
     echo $tokenizer->checkToken($_GET['jwt']);
 });
 
-get('/.well-known/jwks.json', function (){
+get('/.well-known/jwks.json', function () {
     header('Content-Type: application/json; charset=utf-8');
     echo file_get_contents(".well-known/jwks.json");
 });
 
+post('/registration', function () {
+
+    $tokenizer = new Tokenizer();
+    $params = json_decode( file_get_contents('php://input'), TRUE );
+    $user = json_decode($tokenizer->checkToken(getallheaders()['token'] ?? ""));
+    $db = new Database();
+    if ($db->isAdmin($user->email)) {
+        if(!$db->isset($params) && $message = $db->save($params)){
+            http_response_code(201);
+            echo json_encode(["message" => $message]);
+        } else {
+            http_response_code(206);
+            echo json_encode(["message" => "data isnt validate. fields 'email' and 'profile' is required, 'email' is unique"]);
+        }
+    } else {
+        http_response_code(403);
+        echo json_encode(["message" => "403 Forbidden"]);
+    }
+
+});
 // проверка работоспособности сайта
 get('/manage/health', 'src/health.php');
 

@@ -7,7 +7,6 @@ $reservations = json_decode(curl("http://reservation_system:80/get_reservations"
 $reservations = array_filter($reservations, fn($x) => $x->status == "RENTED");
 $reservation = reset($reservations);
 echo curl_post("http://gateway_service:80/api/v1/reservations/$reservation->reservation_uid/return",
-    "
-    {\n    \"condition\": \"EXCELLENT\",\n    \"date\": \"2021-10-11\"\n}"
-    , ["token: $jwt"]);
+    json_encode(['condition' => 'EXCELLENT', 'date' => '2021-10-11']),
+    ["token: $jwt"]);
 
