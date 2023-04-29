@@ -13,13 +13,17 @@ get('/autorize', function () {
         $tokenizer = new Tokenizer();
         echo $tokenizer->generateToken(["profile" => $_GET['profile'], "email" => $_GET['email']]);
     } else {
-        echo "Access Denied";
+        echo json_encode(["message" => "Access Denied"]);
     }
 });
 
 get('/callback', function () {
     $tokenizer = new Tokenizer();
-    echo $tokenizer->checkToken($_GET['jwt']);
+    try{
+        echo $tokenizer->checkToken($_GET['jwt']);
+    } catch (Exception $e){
+        echo json_encode(["message" => "Access Denied"]);
+    }
 });
 
 get('/.well-known/jwks.json', function () {
