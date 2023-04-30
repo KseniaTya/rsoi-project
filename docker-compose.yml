@@ -127,5 +127,19 @@ services:
       - ./instruments:/var/www/html/instruments
     command: bash -c "composer install && php jwksGenerator.php && apache2-foreground"
 
+  statistic_service:
+    build: services
+    container_name: statistic_service
+    restart: always
+    ports:
+      - "8030:80"
+    depends_on:
+      - postgres
+      - identity_provider
+    volumes:
+      - ./services/statistic_service:/var/www/html
+      - ./instruments:/var/www/html/instruments
+    command: bash -c "composer install && php instruments/load_jwks.php && apache2-foreground"
+
 volumes:
   db-data:

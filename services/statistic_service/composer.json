@@ -1,0 +1,11 @@
+{
+    "name": "test/app",
+    "description": "Simple PHP Composer app",
+    "type": "project",
+    "require": {
+        "leocarmo/circuit-breaker-php": "^5.0.0",
+        "guzzlehttp/guzzle": "^7.5.0",
+        "firebase/php-jwt": "^6.4.0",
+        "monolog/monolog": "^3.3.1"
+    }
+}
