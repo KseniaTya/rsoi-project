@@ -28,9 +28,11 @@ services:
     image: wurstmeister/zookeeper
     ports:
       - 2181:2181
+    restart: always
 
   kafka:
     image: wurstmeister/kafka
+    restart: always
     ports:
       - 9092:9092
     environment:
@@ -44,6 +46,7 @@ services:
 
   redis:
     image: 'bitnami/redis:latest'
+    restart: always
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
@@ -131,8 +134,8 @@ services:
     volumes:
       - ./services/statistic_service:/var/www/html
       - ./instruments:/var/www/html/instruments
-#    command: bash -c "composer install && php instruments/load_jwks.php && mkdir .sqlite3_db && chown -R  www-data ./.sqlite3_db && apache2-foreground"
-    command: bash -c "composer install && php instruments/load_jwks.php && { php /var/www/html/save_statistic.php > /dev/null & } && apache2-foreground"
+#    command: bash -c "composer install && php instruments/load_jwks.php && mkdir -p db && && chown -R  www-data ./db && apache2-foreground"
+    command: bash -c "composer install && php instruments/load_jwks.php && mkdir -p db && chmod 777 -R ./db && { php /var/www/html/save_statistic.php > /dev/null & } && apache2-foreground"
 
 volumes:
   db-data:
