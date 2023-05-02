@@ -2,6 +2,8 @@
 /** @var LeoCarmo\CircuitBreaker\CircuitBreaker $circuit */
 include "instruments/utils.php";
 
+saveStatistic('Попытка вернуть книгу');
+
 header('Content-Type: application/json; charset=utf-8');
 $input = json_decode( file_get_contents('php://input'), TRUE );
 
@@ -50,6 +52,8 @@ try{
             curl("http://rating_system:80/change_rating?stars=$stars", ["token: $token"]);
 
             $circuit->success();
+            saveStatistic('Книга возвращена');
+
             http_response_code(204);
             echo ("
                 \"condition\": \"$condition\",
@@ -58,6 +62,8 @@ try{
         }
     }
 } catch (RuntimeException $e){
+    saveStatistic('Провал вернуть книгу');
+
     $circuit->failure();
 
     $json = urlencode(json_encode([

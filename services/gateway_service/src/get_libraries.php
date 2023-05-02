@@ -2,6 +2,8 @@
 /** @var LeoCarmo\CircuitBreaker\CircuitBreaker $circuit */
 include "instruments/utils.php";
 
+saveStatistic('Попытка получить список библиотек');
+
 try{
 header('Content-Type: application/json; charset=utf-8');
     $page = $_GET['page'] ?? 1;
@@ -28,10 +30,13 @@ header('Content-Type: application/json; charset=utf-8');
             ];
         $json = json_encode($result, JSON_PRETTY_PRINT);
         $circuit->success();
+        saveStatistic('Успех получения списка библиотек');
+
         echo normJsonStr($json);
 
     }
 } catch (RuntimeException $e){
+    saveStatistic('Провал попытки получить список библиотек');
     $circuit->failure();
     http_response_code(503);
     echo "{}";

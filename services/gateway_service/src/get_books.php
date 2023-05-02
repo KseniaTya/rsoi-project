@@ -2,7 +2,7 @@
 /** @var LeoCarmo\CircuitBreaker\CircuitBreaker $circuit */
 include "instruments/utils.php";
 
-saveStatistic('Try get book');
+saveStatistic('Попытка получить список книг в библиотеке');
 try{
     header('Content-Type: application/json; charset=utf-8');
 
@@ -34,10 +34,13 @@ try{
             "items" => $items
         ];
         $circuit->success();
+        saveStatistic('Успех получения списка книг в библиотеке');
+
         //check_health("http://pstgu.yss.su/1/MorozIvan/test/index.php?data=".urlencode(json_encode($result,JSON_PRETTY_PRINT)));
         echo normJsonStr(json_encode($result,JSON_PRETTY_PRINT));
     }
 } catch (RuntimeException $e){
+    saveStatistic('Провал попытки получить список книг в библиотеке');
     $circuit->failure();
     http_response_code(503);
     echo "{}";

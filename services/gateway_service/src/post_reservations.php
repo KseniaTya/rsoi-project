@@ -3,6 +3,7 @@ header('Content-Type: application/json');
 include "instruments/utils.php";
 /** @var LeoCarmo\CircuitBreaker\CircuitBreaker $circuit */
 
+saveStatistic('Попытка взять книгу');
 
 try{
     $input= json_decode(file_get_contents('php://input'), TRUE );
@@ -32,6 +33,9 @@ try{
         $rating = json_decode(curl("http://gateway_service:80/api/v1/rating", ["token: $token"]));
         $result = (object) array_merge((array) $reservation, (array) $rating);
         $circuit->success();
+
+        saveStatistic('Успех взятия книги');
+
         http_response_code(200);
         echo json_encode($result);
 
@@ -41,6 +45,8 @@ try{
     }
 
 } catch (RuntimeException $e){
+    saveStatistic('Провал взятия книги');
+
     $circuit->failure();
     http_response_code(503);
     echo json_encode(["message"=> $e->getMessage()]);

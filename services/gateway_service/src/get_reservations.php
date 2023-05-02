@@ -2,6 +2,8 @@
 /** @var LeoCarmo\CircuitBreaker\CircuitBreaker $circuit */
 include "instruments/utils.php";
 
+saveStatistic('Попытка получить список резерваций');
+
 try {
     header('Content-Type: application/json; charset=utf-8');
     $token= getallheaders()['token'] ?? "";
@@ -31,10 +33,13 @@ try {
         ];
     }, $reservations);
     $circuit->success();
+    saveStatistic('Успех получения резерваций');
 
     echo json_encode($result);
 }
 catch (RuntimeException $e){
+    saveStatistic('Провал попытки получить список резерваций');
+
     $circuit->failure();
     http_response_code(503);
     echo "[]";
