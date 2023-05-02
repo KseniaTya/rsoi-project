@@ -79,6 +79,35 @@ function normJsonStr($str){
 require_once __DIR__ . '/../vendor/autoload.php';
 use LeoCarmo\CircuitBreaker\CircuitBreaker;
 use LeoCarmo\CircuitBreaker\Adapters\RedisAdapter;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
+
+function saveStatistic($message){
+    $conf = new RdKafka\Conf();
+    $conf->set('metadata.broker.list', 'kafka:9092');
+    $producer = new RdKafka\Producer($conf);
+    $topic = $producer->newTopic('logs');
+
+    try {
+        $jwt= getallheaders()['token'] ?? "";
+        $jwks = json_decode(file_get_contents(".well-known/jwks.json"));
+        $jwk = $jwks->keys[0]->x5c[0];
+        $decoded = JWT::decode($jwt, new Key($jwk, 'RS256'));
+        $username = $decoded->profile;
+    } catch (Exception $e) {
+        $username = '__Unauthorized';
+    }
+
+    $data = json_encode([
+        'message' => $message,
+        'service' => $_SERVER['HTTP_HOST'],
+        'token' => $username
+    ]);
+    $topic->produce(RD_KAFKA_PARTITION_UA, 0, $data);
+
+    $producer->flush(1000);
+}
+
 
 // возьмем название файла как название сервиса CircuitBreaker'а
 $stack = debug_backtrace();

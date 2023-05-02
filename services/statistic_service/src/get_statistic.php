@@ -1,8 +1,18 @@
 <?php
 
 if(isAdmin($_GET['email'])){
+
+    $db = new SQLite3($_SERVER['DOCUMENT_ROOT'].'/db/statistic.db');
+
+    $db->exec("CREATE TABLE IF NOT EXISTS statistic(id INTEGER PRIMARY KEY, message TEXT, service TEXT, username TEXT, datetime TEXT)");
+    $res = $db->query('SELECT * FROM statistic');
+
+    $result = [];
+    while ($row = $res->fetchArray(SQLITE3_ASSOC)) {
+        $result[] = $row;
+    }
     http_response_code(200);
-    echo json_encode(["message" => "kek"]);
+    echo json_encode(["message" => json_encode($result)]);
 } else {
     http_response_code(401);
     echo json_encode(["message" => "401 Unauthorized - you are not admin"]);

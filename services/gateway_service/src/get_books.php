@@ -2,12 +2,13 @@
 /** @var LeoCarmo\CircuitBreaker\CircuitBreaker $circuit */
 include "instruments/utils.php";
 
+saveStatistic('Try get book');
 try{
     header('Content-Type: application/json; charset=utf-8');
 
     $page = $_GET['page'] ?? 1;
     $size = $_GET['size'] ?? 50;
-    $token= getallheaders()['token'] ?? "";
+    $token = getallheaders()['token'] ?? "";
     $token = urlencode($token);
 
     if($size < 0 || $page < 0){

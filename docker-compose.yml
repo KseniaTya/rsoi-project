@@ -25,28 +25,20 @@ services:
       - "5050:80"
 
   zookeeper:
-    image: confluentinc/cp-zookeeper:7.3.2
-    container_name: zookeeper
-    environment:
-      ZOOKEEPER_CLIENT_PORT: 2181
-      ZOOKEEPER_TICK_TIME: 2000
+    image: wurstmeister/zookeeper
     ports:
-      - "22181:2181"
+      - 2181:2181
 
   kafka:
-    image: confluentinc/cp-kafka:7.3.2
-    container_name: kafka-1
+    image: wurstmeister/kafka
     ports:
-      - "9092:9092"
+      - 9092:9092
     environment:
-      KAFKA_BROKER_ID: 1
+      KAFKA_ADVERTISED_HOST_NAME: kafka
+      KAFKA_CREATE_TOPICS: "test:1:1"
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
-      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
-      KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
-      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
-      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     depends_on:
       - zookeeper
 
@@ -139,7 +131,8 @@ services:
     volumes:
       - ./services/statistic_service:/var/www/html
       - ./instruments:/var/www/html/instruments
-    command: bash -c "composer install && php instruments/load_jwks.php && apache2-foreground"
+#    command: bash -c "composer install && php instruments/load_jwks.php && mkdir .sqlite3_db && chown -R  www-data ./.sqlite3_db && apache2-foreground"
+    command: bash -c "composer install && php instruments/load_jwks.php && { php /var/www/html/save_statistic.php > /dev/null & } && apache2-foreground"
 
 volumes:
   db-data:
