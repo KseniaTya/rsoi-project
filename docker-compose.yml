@@ -137,5 +137,13 @@ services:
 #    command: bash -c "composer install && php instruments/load_jwks.php && mkdir -p db && && chown -R  www-data ./db && apache2-foreground"
     command: bash -c "composer install && php instruments/load_jwks.php && mkdir -p db && chmod 777 -R ./db && { php /var/www/html/save_statistic.php > /dev/null & } && apache2-foreground"
 
+  frontend:
+    container_name: frontend
+    build: services/frontend
+    ports:
+      - "3000:3000"
+    environment:
+      GATEWAY_URL: "http://gateway:8080"
+
 volumes:
   db-data:
