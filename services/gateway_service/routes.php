@@ -14,20 +14,26 @@ get('/api/v1/libraries', "src/get_libraries.php");
 get('/api/v1/libraries/$libraryUid/books', 'src/get_books.php');
 // получить список взятых в прокат в прокат книг
 get('/api/v1/reservations', 'src/get_reservations.php');
-// взять книгу в библиотеке
-post('/api/v1/reservations', 'src/post_reservations.php');
-// вернуть книгу из библиотеки
-post('/api/v1/reservations/$reservationUid/return', 'src/post_return_book.php');
+// получить статистику
+get('/api/v1/statistic', 'src/statistic_get.php');
 // получить рейтинг пользователя
 get('/api/v1/rating', 'src/get_rating.php');
+
 // авторизоваться, получить токен
 get('/api/v1/authorize', 'src/auth/authorize.php');
 // получить инфо об авторизованном пользователе по токену
 get('/api/v1/callback', 'src/auth/callback.php');
+
+
+
+
+// взять книгу в библиотеке
+post('/api/v1/reservations', 'src/post_reservations.php');
+// вернуть книгу из библиотеки
+post('/api/v1/reservations/$reservationUid/return', 'src/post_return_book.php');
+
 // зарегистрировать пользователя
 post('/api/v1/registration', 'src/post_user_registration.php');
-// получить статистику
-get('/api/v1/statistic', 'src/statistic_get.php');
 
 // доступ к тестам с уже введенными входным данным
 get('/test', 'tests/index.php');

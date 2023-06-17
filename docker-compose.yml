@@ -144,6 +144,8 @@ services:
       - "3000:3000"
     environment:
       GATEWAY_URL: "http://gateway:8080"
+    volumes:
+      - ./services/frontend/src:/app/src
 
 volumes:
   db-data:
