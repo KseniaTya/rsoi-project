@@ -21,7 +21,8 @@ $('.btn-token').click(function (e) {
             console.log("Кефтемек");
             data.forEach(function(el){
               console.log(data);
-              $('.books').append('<dl><dt>'+ el.name +'</dt> <dd>'+ el.author +'</dd> <dd>'+ el.status +'</dd></dl>');
+
+              $('.books').append('<dl><dt>'+ el.book.name +'</dt> <dd>'+ el.book.author +'</dd> <dd>'+ el.status +'</dd></dl>');
               console.log("кефтеме:");
             });  
                   
