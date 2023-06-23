@@ -20,9 +20,10 @@ $('.btn-token').click(function (e) {
           success: function(data) {
             console.log("Кефтемек");
             console.log(data);
+            let i=0;
             data.forEach(function(el){
                 if(el.status == "RENTED"){
-                  $('.books').append('<dl><dt>'+ el.book.name +'</dt> <dd>'+ el.book.author +'</dd> <dd> <btn class="btn btn-success btn-return-book"> Вернуть </btn> </dd></dl>');
+                  $('.books-reservations').append('<dl><dt>'+ el.book.name +'</dt> <dd>'+ el.book.author +'</dd> <dd>  <input type="hidden" id="reservationUid'+i+'" name="reservationUid" value= "'+el.reservationUid +'"/><btn class="btn btn-success btn-return-book"> Вернуть </btn> </dd></dl>');
                 }
 
              
@@ -36,9 +37,16 @@ $('.btn-token').click(function (e) {
 
  
   console.log(token2);
+});
 
- 
-  
+$(document).on( "click", ".books-reservations  .btn-return-book", function(e) {
+  e.preventDefault();
+  let i = $('.books-reservations  .btn-return-book').index(this);
+  let reservationUid = $(`input[id="reservationUid${i}"]`).val();
+
+  console.log(reservationUid);
+
+
 });
 
 

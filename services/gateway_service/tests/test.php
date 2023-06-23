@@ -15,7 +15,7 @@
             <div class="card-body">
                 <h5 class="card-title">Посмотреть список
                     бронирований</h5>
-                <p class="books"></p>
+                <p class="books-reservations"></p>
                 <btn class="btn btn-primary btn-token">Применить</btn>
             </div>
         </div>
