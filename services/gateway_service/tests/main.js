@@ -1,13 +1,5 @@
 
 $(document).ready(function () {
-    // $('#btnLoad').click(function()    {
-       
-    // });
-
-    //$('.my-text').load('http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru');
-
-   
-   // $('.my-text').load('http://193.233.164.116:8080/test?id_test=get_books.php'); 
 
 
       $.ajax({
@@ -16,7 +8,7 @@ $(document).ready(function () {
         dataType: 'json',
         success: function(token) {
            
-                console.log(token);
+                console.log("кефтеме:" + token);
                
                     // data.fields.forEach(function(field){
                     //      $(`input[name="${field}"]`).addClass("border-danger");
