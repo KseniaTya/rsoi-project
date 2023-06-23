@@ -23,11 +23,11 @@ $('.btn-token').click(function (e) {
           method: 'get',
           dataType: 'json',
           //async: false,
-          data: {
-            jwt: token2
-        },
+        //   data: {
+        //     token: token
+        //  },
           success: function(data) {
-                  console.log(data);
+                  //console.log(data.page);
                   console.log("кефтеме:");
           }
       }); 
