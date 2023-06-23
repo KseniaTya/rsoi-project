@@ -36,5 +36,5 @@ $('.btn-libraries').click(function (e) {
     });
   
    
-    ;
+    
   });
