@@ -5,9 +5,13 @@ $('.btn-token').click(function (e) {
 
   var token2;
   $.get("http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function(data){
+    console.log(data);
+    var a = 4;
+    console.log(a);
     token2 = data.toString();
   });
 
+  console.log(a);
   console.log(token2);
   
 });
