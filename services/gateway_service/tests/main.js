@@ -19,8 +19,13 @@ $('.btn-token').click(function (e) {
           dataType: 'json',
           headers: {'token': token},
           success: function(data) {
-                  console.log(data);
-                  console.log("кефтеме:");
+
+            data.items.forEach(function(el){
+              console.log(data);
+              $('.books').append('<dl><dt>'+ el.name +'</dt> <dd>'+ el.author +'</dd> <dt>Term</dt></dl>');
+              console.log("кефтеме:");
+            });  
+                  
           }
       }); 
 
