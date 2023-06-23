@@ -21,12 +21,9 @@ $('.btn-libraries').click(function (e) {
               console.log("Кефтемек");
               console.log(data);
               let i=0;
-              data.forEach(function(el){
-                  //if(el.status == "RENTED"){
-                    //$('.libraries').append('<dl><dt>'+ el.items.name +'</dt> <dd>  <btn class="btn btn-success btn-return-book"> Вернуть </btn> </dd></dl>');
-                  //}
-  
-               
+              data.forEach(function(el){               
+                    $('.libraries').append('<dl><dt>'+ el.items.name +'</dt> <dd>  <btn class="btn btn-success btn-info-libraries"> Перейти </btn> </dd></dl>');
+
               });  
                     
             }
