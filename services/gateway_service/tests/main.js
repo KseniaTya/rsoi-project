@@ -15,7 +15,7 @@ $('.btn-token').click(function (e) {
     
     $.ajax({
           url: 'http://193.233.164.116:8080/api/v1/api/v1/reservations',
-          type: 'GET',
+          type: 'POST',
           dataType: 'json',
           headers: {'token': token},
           success: function(data) {
