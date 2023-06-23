@@ -35,8 +35,6 @@ $('.btn-token').click(function (e) {
 
 
   });
-
- 
   console.log(token2);
 });
 
@@ -55,7 +53,7 @@ $(document).on( "click", ".books-reservations  .btn-return-book", function(e) {
     dataType: 'json',
     headers: {'token': token},
     success: function(data) {
-      console.log("Кефтемек_er");
+     
       console.log(data);
             
     }
