@@ -15,11 +15,14 @@ $('.btn-token').click(function (e) {
     
     $.ajax({
           url: 'http://193.233.164.116:8080/api/v1/libraries/83575e12-7ce0-48ee-9931-51919ff3c9ee/books?page=1&size=25&showAll=true',
-          type: 'get',
+          type: 'GET',
           dataType: 'json',
+          data: {
+              telephone: 1,
+          },
           headers: {'token': token},
           success: function(data) {
-                  console.log(data.name);
+                  console.log(data);
                   console.log("кефтеме:");
           }
       }); 
