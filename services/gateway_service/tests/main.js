@@ -53,7 +53,7 @@ $(document).on( "click", ".books-reservations  .btn-return-book", function(e) {
     
   var token = jwt;
   $.ajax({
-    url: 'http://193.233.164.116:8080/api/v1/reservations/'+ bookUid +'/'+ libraryUid+ '/'+ tillDate + '',
+    url: 'http://193.233.164.116:8080/api/v1/reservations/'+ bookUid +'/'+ libraryUid+ '/'+ tillDate,
     type: 'POST',
     dataType: 'json',
     headers: {'token': token},
