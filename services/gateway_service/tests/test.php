@@ -11,25 +11,11 @@
 
 <body>
     <div class="container">
-        <header class="d-flex justify-content-center py-3">
-            <ul class="nav nav-pills">
-                <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Просмотр книг в </a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Функции</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">Ценообразование</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">FAQ</a></li>
-                <li class="nav-item"><a href="#" class="nav-link">О нас</a></li>
-            </ul>
-        </header>
-        <h1>Привет мир!</h1>
-
         <div class="card" style="width: 18rem;">
-
             <div class="card-body">
-                <h5 class="card-title">Заголовок карточки</h5>
-                <p class="card-text my-text">Небольшой пример текста, который должен основываться на названии карточки
-                    и
-                    составлять основную часть содержимого карты.</p>
-                <btn class="btn btn-primary btn-token">Жмяк</btn>
+                <h5 class="card-title">Посмотреть список
+                    бронирований</h5>
+                <btn class="btn btn-primary btn-token">Применить</btn>
             </div>
         </div>
         <div class="row">
