@@ -29,8 +29,8 @@ $('.btn-token').click(function (e) {
           contentType: false,
           cashe: false,
           data: formData,
-          success: function(data) {
-                  //console.log(data.page);
+          success: function() {
+                  console.log(data.page);
                   console.log("кефтеме:");
           }
       }); 
