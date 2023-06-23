@@ -3,12 +3,12 @@ $('.btn-token').click(function (e) {
   e.preventDefault();
   $('.my-text').load('http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru');
 
-  var token;
+  var token2;
   $.get("http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function(data){
-    token = data;
+    token2 = data;
   });
 
-  console.log(token);
+  console.log(token2);
   
 });
 
