@@ -19,11 +19,11 @@ $('.btn-token').click(function (e) {
           headers: {'token': token},
           success: function(data) {
             console.log("Кефтемек");
-            // data.book.forEach(function(el){
-            //   console.log(data);
-            //   $('.books').append('<dl><dt>'+ el.name +'</dt> <dd>'+ el.author +'</dd></dl>');
-            //   console.log("кефтеме:");
-            // });  
+            data.book.forEach(function(el){
+              console.log(data);
+              $('.books').append('<dl><dt>'+ el.name +'</dt> <dd>'+ el.author +'</dd></dl>');
+              console.log("кефтеме:");
+            });  
                   
           }
       }); 
