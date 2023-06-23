@@ -7,7 +7,9 @@ $('.btn-token').click(function (e) {
   $.get("http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function(jwt){
     // console.log(data);
     var token = jwt;
+    token2 = jwt;
     console.log(token);
+    console.log("======================"+token2);
     // token2 = data.toString();
 
     
@@ -18,7 +20,7 @@ $('.btn-token').click(function (e) {
           dataType: 'json',
           //async: false,
           data: {
-            jwt: token
+            jwt: token2
         },
           success: function(data) {
                   console.log(data);
