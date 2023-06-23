@@ -11,12 +11,24 @@
 
 <body>
     <div class="container">
+
         <div class="card mt-5" style="width: 18rem;">
             <div class="card-body">
                 <h5 class="card-title">Посмотреть список
                     бронирований</h5>
                 <p class="books-reservations"></p>
                 <btn class="btn btn-primary btn-token">Применить</btn>
+            </div>
+        </div>
+        <div class="row">
+
+        </div>
+
+        <div class="card mt-5" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">Посмотреть книги в библиотеке</h5>
+                <p class="books-reservations"></p>
+                <btn class="btn btn-primary btn-librales">Применить</btn>
             </div>
         </div>
         <div class="row">
@@ -34,6 +46,7 @@
 
     <script src="tests\jquery-3.6.4.min.js"></script>
     <script src="tests\main.js"></script>
+    <script src="tests\librares.js"></script>
 </body>
 
 </html>
