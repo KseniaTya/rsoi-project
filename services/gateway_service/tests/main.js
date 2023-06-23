@@ -1,6 +1,7 @@
 
 $('.btn-token').click(function (e) { 
   e.preventDefault();
+  $('.books-reservations').text('');
   //$('.my-text').load('http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru');
 
   var token2;
@@ -45,8 +46,23 @@ $(document).on( "click", ".books-reservations  .btn-return-book", function(e) {
   let reservationUid = $(`input[id="reservationUid${i}"]`).val();
 
   console.log(reservationUid);
+  $.get("http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function(jwt){
+    
+  var token = jwt;
+  $.ajax({
+    url: 'http://193.233.164.116:8080/api/v1/reservations/'+ reservationUid +'/return',
+    type: 'POST',
+    dataType: 'json',
+    headers: {'token': token},
+    success: function(data) {
+      console.log("Кефтемек_er");
+      console.log(data);
+            
+    }
+  }); 
 
 
+  });
 });
 
 
