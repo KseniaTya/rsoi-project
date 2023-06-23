@@ -19,11 +19,13 @@ $('.btn-token').click(function (e) {
           headers: {'token': token},
           success: function(data) {
             console.log("Кефтемек");
+            console.log(data);
             data.forEach(function(el){
-              console.log(data);
+                if(el.status == "RENTED"){
+                  $('.books').append('<dl><dt>'+ el.book.name +'</dt> <dd>'+ el.book.author +'</dd> <dd> <btn class="btn btn-success btn-return-book"> Вернуть </btn> </dd></dl>');
+                }
 
-              $('.books').append('<dl><dt>'+ el.book.name +'</dt> <dd>'+ el.book.author +'</dd> <dd>'+ el.status +'</dd></dl>');
-              console.log("кефтеме:");
+             
             });  
                   
           }
