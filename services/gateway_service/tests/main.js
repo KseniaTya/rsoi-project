@@ -23,9 +23,9 @@ $('.btn-token').click(function (e) {
           method: 'get',
           dataType: 'json',
           //async: false,
-        //   data: {
-        //     token: token
-        //  },
+          data: {
+            token: token
+         },
           success: function(data) {
                   //console.log(data.page);
                   console.log("кефтеме:");
