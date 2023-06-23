@@ -49,8 +49,12 @@ $('.btn-libraries').click(function (e) {
       success: function(data) {
       
         console.log(data);
-        data.items.forEach(function(el){               
-          $('.libraries').append('<dl><dt>'+ el.name +'</dt> <dt>'+ el.author +'</dt> <dd>Доступно: '+ el.availableCount +'</dd> <dd>  <btn class="btn btn-success "> Забронировать </btn> </dd></dl>');
+        data.items.forEach(function(el){   
+          if(el.availableCount == 0){
+            $('.libraries').append('<dl><dt>'+ el.name +'</dt> <dt>'+ el.author +'</dt> <dd>Доступно: '+ el.availableCount +'</dd> </dl>');
+          }  else{
+            $('.libraries').append('<dl><dt>'+ el.name +'</dt> <dt>'+ el.author +'</dt> <dd>Доступно: '+ el.availableCount +'</dd> <dd>  <btn class="btn btn-success "> Забронировать </btn> </dd></dl>');
+          }
         }); 
               
       }
