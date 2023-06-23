@@ -51,6 +51,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
     ports:
       - "6379:6379"
+
   gateway_service:
     build: services
     container_name: gateway_service
@@ -138,14 +139,13 @@ services:
     command: bash -c "composer install && php instruments/load_jwks.php && mkdir -p db && chmod 777 -R ./db && { php /var/www/html/save_statistic.php > /dev/null & } && apache2-foreground"
 
   frontend:
+    image: nginx
     container_name: frontend
-    build: services/frontend
+    working_dir: /usr/share/nginx/html
     ports:
-      - "3000:3000"
-    environment:
-      GATEWAY_URL: "http://gateway:8080"
+      - "3000:80"
     volumes:
-      - ./services/frontend/src:/app/src
+      - ./services/frontend:/usr/share/nginx/html
 
 volumes:
   db-data:
