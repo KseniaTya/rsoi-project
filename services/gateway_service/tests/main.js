@@ -14,7 +14,7 @@ $('.btn-token').click(function (e) {
     formData.append('token', token);
     
     $.ajax({
-          url: 'http://193.233.164.116:8080/api/v1/libraries/83575e12-7ce0-48ee-9931-51919ff3c9ee/books?page=1&size=25&showAll=true',
+          url: 'http://193.233.164.116:8080/api/v1/api/v1/reservations',
           type: 'GET',
           dataType: 'json',
           headers: {'token': token},
@@ -22,7 +22,7 @@ $('.btn-token').click(function (e) {
 
             data.items.forEach(function(el){
               console.log(data);
-              $('.books').append('<dl><dt>'+ el.name +'</dt> <dd>'+ el.author +'</dd> <dt>Term</dt></dl>');
+              $('.books').append('<dl><dt>'+ el.name +'</dt> <dd>'+ el.author +'</dd></dl>');
               console.log("кефтеме:");
             });  
                   
