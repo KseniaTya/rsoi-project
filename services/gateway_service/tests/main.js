@@ -20,20 +20,24 @@ $('.btn-token').click(function (e) {
     let formData = new FormData();
     formData.append('token', token);
     
+    $.get("http://193.233.164.116:8080/api/v1/api/v1/libraries/83575e12-7ce0-48ee-9931-51919ff3c9ee/books?page=1&size=25&showAll=true", function(data){
+      console.log(data.page);
+      console.log("кефтеме:");
+    });
 
-    $.ajax({
-          url: 'http://193.233.164.116:8080/api/v1/api/v1/libraries/83575e12-7ce0-48ee-9931-51919ff3c9ee/books?page=1&size=25&showAll=true',
-          type: 'get',
-          dataType: 'json',
-          processData: false,
-          contentType: false,
-          cashe: false,
-          data: formData,
-          success: function() {
-                  console.log(data.page);
-                  console.log("кефтеме:");
-          }
-      }); 
+    // $.ajax({
+    //       url: 'http://193.233.164.116:8080/api/v1/api/v1/libraries/83575e12-7ce0-48ee-9931-51919ff3c9ee/books?page=1&size=25&showAll=true',
+    //       type: 'get',
+    //       dataType: 'json',
+    //       processData: false,
+    //       contentType: false,
+    //       cashe: false,
+    //       data: formData,
+    //       success: function(data) {
+    //               console.log(data.page);
+    //               console.log("кефтеме:");
+    //       }
+    //   }); 
 
 
   });
