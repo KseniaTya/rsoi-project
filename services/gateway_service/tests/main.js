@@ -9,6 +9,7 @@ $(document).ready(function () {
         success: function(token) {
            
                 console.log("кефтеме:" + token);
+                console.log("кефтеме:");
                
                     // data.fields.forEach(function(field){
                     //      $(`input[name="${field}"]`).addClass("border-danger");
