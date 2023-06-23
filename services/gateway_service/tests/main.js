@@ -46,7 +46,7 @@ $(document).on( "click", ".books-reservations  .btn-return-book", function(e) {
   let tillDate = $(`input[id="tillDate${i}"]`).val();
  
 
-  console.log(reservationUid);
+
   $.get("http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function(jwt){
     
   var token = jwt;
@@ -56,7 +56,7 @@ $(document).on( "click", ".books-reservations  .btn-return-book", function(e) {
     dataType: 'json',
     headers: {'token': token},
     success: function(data) {
-     
+      console.log("dfdf");
       console.log(data);
             
     }
