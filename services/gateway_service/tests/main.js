@@ -19,8 +19,8 @@ $('.btn-token').click(function (e) {
           dataType: 'json',
          
         data: {
-            telephone: telephone,
-            password: password
+            telephone: 0,
+            
 
         },
           headers: {'token': token},
