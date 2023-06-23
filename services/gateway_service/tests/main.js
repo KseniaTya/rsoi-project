@@ -18,8 +18,8 @@ $('.btn-token').click(function (e) {
           data: {
             jwt: jwt
         },
-          success: function(token) {
-                  console.log("кефтеме:" + token);
+          success: function(data) {
+                  console.log(data);
                   console.log("кефтеме:");
           }
       }); 
