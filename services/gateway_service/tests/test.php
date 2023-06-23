@@ -45,10 +45,10 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
 
-    <script src="jquery-3.6.4.min.js">
+    <script src="services\gateway_service\tests\jquery-3.6.4.min.js">
     </script>
 
-    <script src="main.js">
+    <script src="services\gateway_service\tests\main.js">
     </script>
 </body>
 
