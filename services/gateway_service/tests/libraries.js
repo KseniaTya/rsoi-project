@@ -13,7 +13,7 @@ $('.btn-libraries').click(function (e) {
      
       
       $.ajax({
-            url: 'http://193.233.164.116:8080/api/v1/reservations',
+            url: 'http://193.233.164.116:8080/api/v1/libraries',
             type: 'GET',
             dataType: 'json',
             headers: {'token': token},
@@ -22,9 +22,9 @@ $('.btn-libraries').click(function (e) {
               console.log(data);
               let i=0;
               data.forEach(function(el){
-                  if(el.status == "RENTED"){
-                    $('.books-reservations').append('<dl><dt>'+ el.book.name +'</dt> <dd>'+ el.book.author +'</dd> <dd>  <input type="hidden" id="reservationUid'+i+'" name="reservationUid" value= "'+el.reservationUid +'"/><btn class="btn btn-success btn-return-book"> Вернуть </btn> </dd></dl>');
-                  }
+                  //if(el.status == "RENTED"){
+                    //$('.libraries').append('<dl><dt>'+ el.items.name +'</dt> <dd>  <btn class="btn btn-success btn-return-book"> Вернуть </btn> </dd></dl>');
+                  //}
   
                
               });  
