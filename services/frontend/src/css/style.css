@@ -1,3 +1,6 @@
-.card{
-    width: 18rem;
+.hr-type-1{
+    border-width: 3px;
+}
+.hr-type-2{
+    border-width: 1px;
 }
