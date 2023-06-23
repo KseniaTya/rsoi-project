@@ -29,7 +29,7 @@
                 <p class="card-text my-text">Небольшой пример текста, который должен основываться на названии карточки
                     и
                     составлять основную часть содержимого карты.</p>
-                <a href="#" class="btn btn-primary">Перейти куда-нибудь</a>
+                <btn class="btn btn-primary btn-token">Жмяк</btn>
             </div>
         </div>
         <div class="row">
