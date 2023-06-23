@@ -4,10 +4,10 @@ $('.btn-token').click(function (e) {
   $('.my-text').load('http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru');
 
   var token2;
-  $.get("http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function($jwt){
+  $.get("http://193.233.164.116:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function(jwt){
     // console.log(data);
     // var a = 4;
-    // console.log(a);
+    console.log(jwt);
     // token2 = data.toString();
 
     $.ajax({
@@ -15,7 +15,7 @@ $('.btn-token').click(function (e) {
           type: 'GET',
           dataType: 'json',
           data: {
-            $jwt: $jwt,
+            jwt: jwt,
         },
           success: function(token) {
                   console.log("кефтеме:" + token);
@@ -26,7 +26,7 @@ $('.btn-token').click(function (e) {
 
   });
 
-  console.log(a);
+ 
   console.log(token2);
   
 });
