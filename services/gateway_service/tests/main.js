@@ -17,20 +17,14 @@ $('.btn-token').click(function (e) {
           url: 'http://193.233.164.116:8080/api/v1/api/v1/reservations',
           type: 'GET',
           dataType: 'json',
-         
-        data: {
-            telephone: 0,
-            
-
-        },
           headers: {'token': token},
           success: function(data) {
             console.log("Кефтемек");
-            data.book.forEach(function(el){
-              console.log(data);
-              $('.books').append('<dl><dt>'+ el.name +'</dt> <dd>'+ el.author +'</dd></dl>');
-              console.log("кефтеме:");
-            });  
+            // data.book.forEach(function(el){
+            //   console.log(data);
+            //   $('.books').append('<dl><dt>'+ el.name +'</dt> <dd>'+ el.author +'</dd></dl>');
+            //   console.log("кефтеме:");
+            // });  
                   
           }
       }); 
