@@ -11,7 +11,7 @@ use Firebase\JWT\Key;
 class Tokenizer
 {
     private $key;
-    private $expirationMinutes = 1;
+    private $expirationMinutes = 120;
 
     public function __construct()
     {
