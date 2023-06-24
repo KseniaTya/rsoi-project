@@ -11,8 +11,7 @@ $('.btn-token').click(function (e) {
             dataType: 'json',
             headers: {'token': token},
             success: function (data) {
-                console.log("Кефтемек");
-                console.log(data);
+
                 let i = 0;
                 $('.books-reservations').append('<hr class="hr-type-1">');
                 data.forEach(function (el) {
@@ -22,7 +21,7 @@ $('.btn-token').click(function (e) {
                         '<input type="hidden" id="bookUid' + i + '" name="bookUid" value= "' + el.book.bookUid + '"/> ' +
                         '<input type="hidden" id="libraryUid' + i + '" name="libraryUid" value= "' + el.library.libraryUid + '"/>');
                     if (el.status == "RENTED") {
-                        $('.books-reservations').append('<btn class="btn btn-success btn-return-book" value="'+i+'"> Вернуть </btn> </dd></dl>');
+                        $('.books-reservations').append('<btn class="btn btn-success btn-return-book" value="' + i + '"> Вернуть </btn> </dd></dl>');
                     } else {
                         $('.books-reservations').append('(Возвращен)');
                     }
@@ -40,11 +39,8 @@ $(document).on("click", ".btn-return-book", function (e) {
     e.preventDefault();
     let i = $(this).attr('value');
     let reservationUid = $(`input[id="reservationUid${i}"]`).val();
-/*    let bookUid = $(`input[id="bookUid${i}"]`).val();
-    let libraryUid = $(`input[id="libraryUid${i}"]`).val();
-    let tillDate = $(`input[id="tillDate${i}"]`).val();*/
     const today = new Date();
-    const formattedDate = today.toISOString().slice(0,10);
+    const formattedDate = today.toISOString().slice(0, 10);
 
 
     $.get("http://localhost:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function (jwt) {
@@ -59,9 +55,8 @@ $(document).on("click", ".btn-return-book", function (e) {
                 date: formattedDate
             }),
             success: function (data) {
-                console.log("dfdf");
-                console.log(data);
-
+                $('.btn-token').trigger('click');
+                $('.btn-libraries').trigger('click');
             }
         });
 
