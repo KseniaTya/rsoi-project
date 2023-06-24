@@ -18,8 +18,7 @@ function loadHeader(){
                     dataType: 'json',
                     headers: {'token': jwt},
                     success: function (data) {
-
-                        $('.userinfo').append('<span>'+profile+', рейтинг '+data.stars+'</span>')
+                        $('.userinfo').text(profile+', рейтинг '+data.stars)
 
                     }
                 });
