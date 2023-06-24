@@ -16,13 +16,18 @@ $('.btn-token').click(function (e) {
                 let i = 0;
                 $('.books-reservations').append('<hr class="hr-type-1">');
                 data.forEach(function (el) {
-                    $('.books-reservations').append('<dl><dt>' + el.book.name + '</dt> <dd>' + el.book.author + '</dd> <dd>  <input type="hidden" id="tillDate' + i + '" name="tillDate" value= "' + el.tillDate + '"/> <input type="hidden" id="bookUid' + i + '" name="bookUid" value= "' + el.book.bookUid + '"/> <input type="hidden" id="libraryUid' + i + '" name="libraryUid" value= "' + el.library.libraryUid + '"/>');
+                    $('.books-reservations').append('<dl><dt>' + el.book.name + '</dt> <dd>' + el.book.author + '</dd> <dd>  ' +
+                        '<input type="hidden" id="reservationUid' + i + '" name="reservationUid" value= "' + el.reservationUid + '"/> ' +
+                        '<input type="hidden" id="tillDate' + i + '" name="tillDate" value= "' + el.tillDate + '"/> ' +
+                        '<input type="hidden" id="bookUid' + i + '" name="bookUid" value= "' + el.book.bookUid + '"/> ' +
+                        '<input type="hidden" id="libraryUid' + i + '" name="libraryUid" value= "' + el.library.libraryUid + '"/>');
                     if (el.status == "RENTED") {
-                        $('.books-reservations').append('<btn class="btn btn-success btn-return-book"> Вернуть </btn> </dd></dl>');
+                        $('.books-reservations').append('<btn class="btn btn-success btn-return-book" value="'+i+'"> Вернуть </btn> </dd></dl>');
                     } else {
                         $('.books-reservations').append('(Возвращен)');
                     }
                     $('.books-reservations').append('<hr class="hr-type-2">');
+                    i++;
                 });
 
             }
@@ -31,26 +36,28 @@ $('.btn-token').click(function (e) {
     });
 });
 
-$(document).on("click", ".books-reservations  .btn-return-book", function (e) {
+$(document).on("click", ".btn-return-book", function (e) {
     e.preventDefault();
-    let i = $('.books-reservations  .btn-return-book').index(this);
-    let bookUid = $(`input[id="bookUid${i}"]`).val();
+    let i = $(this).attr('value');
+    let reservationUid = $(`input[id="reservationUid${i}"]`).val();
+/*    let bookUid = $(`input[id="bookUid${i}"]`).val();
     let libraryUid = $(`input[id="libraryUid${i}"]`).val();
-    let tillDate = $(`input[id="tillDate${i}"]`).val();
-
-    console.log(bookUid);
-    console.log(libraryUid);
-    console.log(tillDate);
+    let tillDate = $(`input[id="tillDate${i}"]`).val();*/
+    const today = new Date();
+    const formattedDate = today.toISOString().slice(0,10);
 
 
     $.get("http://localhost:8080/api/v1/authorize?profile=admin&email=admin@admin.ru", function (jwt) {
 
-        var token = jwt;
         $.ajax({
-            url: 'http://localhost:8080/api/v1/reservations/' + bookUid + '/' + libraryUid + '/' + tillDate,
+            url: 'http://localhost:8080/api/v1/reservations/' + reservationUid + '/return',
             type: 'POST',
-            dataType: 'json',
-            headers: {'token': token},
+            contentType: "application/json",
+            headers: {'token': jwt},
+            data: JSON.stringify({
+                condition: 'EXCELLENT',
+                date: formattedDate
+            }),
             success: function (data) {
                 console.log("dfdf");
                 console.log(data);
