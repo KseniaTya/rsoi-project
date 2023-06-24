@@ -11,6 +11,10 @@
 </head>
 
 <body>
+<div class="header">
+    <div>Книжный портал</div>
+    <div class="userinfo"></div>
+</div>
 <div class="container">
 
     <div class="card mt-5 h-75">
@@ -20,9 +24,6 @@
             <btn class="btn btn-primary btn-token">Посмотреть</btn>
         </div>
     </div>
-    <div class="row">
-
-    </div>
 
     <div class="card mt-5 h-75">
         <div class="card-body">
@@ -31,9 +32,17 @@
             <btn class="btn btn-primary btn-libraries">Посмотреть</btn>
         </div>
     </div>
-    <div class="row">
 
+    <div class="card mt-5 h-75">
+        <div class="card-body">
+            <h5 class="card-title">Статистика</h5>
+            <div id="statistics">
+                <btn class="btn btn-primary open-statistics" value="false">Открыть статистику</btn>
+                <div class="statistic-table"></div>
+            </div>
+        </div>
     </div>
+
 </div>
 
 
@@ -41,8 +50,11 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
 </script>
 <script src="src/js/jquery-3.6.4.min.js"></script>
+<script src="src/js/header.js"></script>
 <script src="src/js/main.js"></script>
 <script src="src/js/libraries.js"></script>
+<script src="src/js/statistics.js"></script>
+
 
 </body>
 

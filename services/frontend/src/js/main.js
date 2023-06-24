@@ -55,6 +55,7 @@ $(document).on("click", ".btn-return-book", function (e) {
                 date: formattedDate
             }),
             success: function (data) {
+                loadHeader();
                 $('.btn-token').trigger('click');
                 $('.btn-libraries').trigger('click');
             }
