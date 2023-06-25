@@ -142,6 +142,7 @@ services:
     image: nginx
     container_name: frontend
     working_dir: /usr/share/nginx/html
+    restart: always
     ports:
       - "3000:80"
     volumes:
