@@ -11,7 +11,7 @@ get('/autorize', function () {
     $db = new Database();
     if ($db->isset($_GET)) {
         $tokenizer = new Tokenizer();
-        echo $tokenizer->generateToken(["profile" => $_GET['profile'], "email" => $_GET['email']]);
+        echo $tokenizer->generateToken(["profile" => $_GET['profile'], "email" => $_GET['email'], "isAdmin" => $db->isAdmin($_GET['email'])]);
     } else {
         echo json_encode(["message" => "Access Denied"]);
     }

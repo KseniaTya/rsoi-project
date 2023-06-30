@@ -17,7 +17,26 @@
 </div>
 <div class="container">
 
-    <div class="card mt-5 h-75">
+    <div class="card mt-5 h-75 auth-card">
+        <div class="card-body">
+            <h5 class="card-title">Авторизация</h5>
+            <form id="login-form">
+                <label for="profile">Имя профайла:</label>
+                <div>
+                    <input type="text" id="profile" name="profile"><br><br>
+                </div>
+
+                <label for="email">Email:</label>
+                <div>
+                    <input type="email" id="email" name="email"><br><br>
+                </div>
+
+                <input type="submit" class="btn btn-primary" id="login" value="Отправить">
+            </form>
+        </div>
+    </div>
+
+    <div class="card mt-5 h-75 books-reservations-card">
         <div class="card-body">
             <h5 class="card-title">Список бронирований</h5>
             <p class="books-reservations"></p>
@@ -25,7 +44,7 @@
         </div>
     </div>
 
-    <div class="card mt-5 h-75">
+    <div class="card mt-5 h-75 libraries-card">
         <div class="card-body">
             <h5 class="card-title">Книги в библиотеке</h5>
             <p class="libraries"></p>
@@ -33,13 +52,31 @@
         </div>
     </div>
 
-    <div class="card mt-5 h-75">
+    <div class="card mt-5 h-75 statistics-card">
         <div class="card-body">
             <h5 class="card-title">Статистика</h5>
             <div id="statistics">
                 <btn class="btn btn-primary open-statistics" value="false">Открыть статистику</btn>
                 <div class="statistic-table"></div>
             </div>
+        </div>
+    </div>
+    <div class="card mt-5 h-75 register-card">
+        <div class="card-body">
+            <h5 class="card-title">Регистрация нового пользователя</h5>
+            <form id="register-form">
+                <label for="profile-reg">Имя профайла:</label>
+                <div>
+                    <input type="text" id="profile-reg" name="profile-reg"><br><br>
+                </div>
+
+                <label for="profile-reg">Email:</label>
+                <div>
+                    <input type="email" id="email-reg" name="email-reg"><br><br>
+                </div>
+
+                <input type="submit" class="btn btn-primary" id="register" value="Зарегистрировать">
+            </form>
         </div>
     </div>
 
