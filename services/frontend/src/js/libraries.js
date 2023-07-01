@@ -82,3 +82,33 @@ $(document).on("click", ".reservate", function (e) {
     });
 
 });
+
+$('#new-book').click(function (e) {
+
+    $.ajax({
+        url: 'http://localhost:8080/api/v1/new_book',
+        type: 'POST',
+        contentType: "application/json",
+        headers: {'token': JWT},
+        data: JSON.stringify({
+            bookUid: $('#new-book-bookiud').val(),
+            name: $('#new-book-name').val(),
+            author: $('#new-book-author').val(),
+            genre: $('#new-book-genre').val(),
+        }),
+        success: function (data) {
+            window.location.replace('/');
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            if (xhr.status === 400) {
+                // Обработка ошибки 400
+                alert('Такой Uid книги уже существует!');
+            } else {
+                // Обработка других ошибок
+                window.location.replace('/');
+            }
+        }
+
+    });
+
+});

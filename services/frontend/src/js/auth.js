@@ -65,7 +65,7 @@ function getTokenFromSession() {
 }
 
 var JWT = getTokenFromSession();
-let isLoad = JWT !== '{"message":"Access Denied"}' && JWT !== '';
+let isLoad = JWT !== '{"message":"Access Denied"}' && JWT !== '' && JWT !== null;
 
 if(isLoad){
     $('.auth-card').hide();
@@ -78,6 +78,7 @@ if(isLoad){
             if(data.isAdmin === false){
                 $('.statistics-card').hide();
                 $('.register-card').hide();
+                $('.new-book-card').hide();
             }
         }
     });
@@ -87,4 +88,5 @@ if(isLoad){
     $('.libraries-card').hide();
     $('.statistics-card').hide();
     $('.register-card').hide();
+    $('.new-book-card').hide();
 }

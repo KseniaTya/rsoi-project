@@ -33,6 +33,8 @@ post('/api/v1/reservations', 'src/post_reservations.php');
 // вернуть книгу из библиотеки
 post('/api/v1/reservations/$reservationUid/return', 'src/post_return_book.php');
 
+// добавить книгу
+post('/api/v1/new_book', 'src/post_book.php');
 // зарегистрировать пользователя
 post('/api/v1/registration', 'src/post_user_registration.php');
 
